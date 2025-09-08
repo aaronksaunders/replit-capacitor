@@ -16,10 +16,7 @@ export class SecureStorage {
   static async setToken(token: string): Promise<void> {
     if (Capacitor.isNativePlatform()) {
       // Use Capacitor Secure Storage for encrypted storage on mobile
-      await CapacitorSecureStorage.set({
-        key: this.TOKEN_KEY,
-        value: token,
-      });
+      await CapacitorSecureStorage.set(this.TOKEN_KEY, token);
     } else {
       // Use localStorage for web browsers (development only)
       localStorage.setItem(this.TOKEN_KEY, token);
@@ -34,8 +31,8 @@ export class SecureStorage {
     if (Capacitor.isNativePlatform()) {
       // Use Capacitor Secure Storage for encrypted storage on mobile
       try {
-        const result = await CapacitorSecureStorage.get({ key: this.TOKEN_KEY });
-        return result.value;
+        const result = await CapacitorSecureStorage.get(this.TOKEN_KEY);
+        return result as string | null;
       } catch (error) {
         // Token not found or error accessing secure storage
         return null;
@@ -53,7 +50,7 @@ export class SecureStorage {
     if (Capacitor.isNativePlatform()) {
       // Use Capacitor Secure Storage for encrypted storage on mobile
       try {
-        await CapacitorSecureStorage.remove({ key: this.TOKEN_KEY });
+        await CapacitorSecureStorage.remove(this.TOKEN_KEY);
       } catch (error) {
         // Token not found or error accessing secure storage
         console.warn('Error removing token from secure storage:', error);
