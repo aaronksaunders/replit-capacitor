@@ -18,17 +18,21 @@ export default function AuthPage() {
 
   // Check for existing token on mount
   useEffect(() => {
-    const token = getStoredToken();
-    if (token && isTokenValid(token)) {
-      // Decode token to get user email
-      try {
-        const payload = JSON.parse(atob(token.split('.')[1]));
-        setUserEmail(payload.email);
-        setIsAuthenticated(true);
-      } catch (error) {
-        removeStoredToken();
+    const checkExistingToken = async () => {
+      const token = await getStoredToken();
+      if (token && isTokenValid(token)) {
+        // Decode token to get user email
+        try {
+          const payload = JSON.parse(atob(token.split('.')[1]));
+          setUserEmail(payload.email);
+          setIsAuthenticated(true);
+        } catch (error) {
+          await removeStoredToken();
+        }
       }
-    }
+    };
+    
+    checkExistingToken();
   }, []);
 
   const handleAuthSuccess = (user: { email: string }) => {
@@ -40,8 +44,8 @@ export default function AuthPage() {
     });
   };
 
-  const handleLogout = () => {
-    removeStoredToken();
+  const handleLogout = async () => {
+    await removeStoredToken();
     setIsAuthenticated(false);
     setUserEmail(null);
     setStatusMessage({
@@ -51,7 +55,7 @@ export default function AuthPage() {
   };
 
   const handleFetchProtectedData = async () => {
-    const token = getStoredToken();
+    const token = await getStoredToken();
     if (!token) {
       setStatusMessage({
         type: 'error',

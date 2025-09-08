@@ -59,7 +59,7 @@ export default function AuthForm({ onSuccess, onStatusChange, isLoading, setIsLo
           setPassword("");
         } else {
           // Store JWT token
-          storeToken(data.token);
+          await storeToken(data.token);
           onSuccess(data.user);
           setEmail("");
           setPassword("");
