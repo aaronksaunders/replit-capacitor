@@ -1,5 +1,6 @@
 node_modules
 dist
+dist-mobile
 .DS_Store
 server/public
 vite.config.ts.*
