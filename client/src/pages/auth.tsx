@@ -6,6 +6,7 @@ import { MobileInfo } from "@/components/mobile-info";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { getStoredToken, removeStoredToken, isTokenValid } from "@/lib/auth";
+import { API_CONFIG } from "@/lib/config";
 
 export default function AuthPage() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -68,7 +69,8 @@ export default function AuthPage() {
     setStatusMessage(null);
 
     try {
-      const response = await fetch('/api/profile', {
+      const apiUrl = API_CONFIG.getApiUrl('/api/profile');
+      const response = await fetch(apiUrl, {
         method: 'GET',
         headers: {
           'Authorization': `Bearer ${token}`,

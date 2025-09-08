@@ -11,7 +11,7 @@ export default defineConfig({
     process.env.REPL_ID !== undefined
       ? [
           await import("@replit/vite-plugin-cartographer").then((m) =>
-            m.cartographer(),
+            m.cartographer()
           ),
         ]
       : []),
@@ -33,5 +33,14 @@ export default defineConfig({
       strict: true,
       deny: ["**/.*"],
     },
+  },
+  define: {
+    // Define environment variables for Vite
+    "import.meta.env.VITE_API_URL": JSON.stringify(
+      process.env.VITE_API_URL || ""
+    ),
+    "import.meta.env.VITE_MOBILE_API_URL": JSON.stringify(
+      process.env.VITE_MOBILE_API_URL || "https://your-server.com"
+    ),
   },
 });

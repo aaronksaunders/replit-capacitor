@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card';
 import { Badge } from './ui/badge';
+import { API_CONFIG } from '@/lib/config';
 
 /**
  * Mobile information component that displays device capabilities and Capacitor status
@@ -10,6 +11,7 @@ export const MobileInfo: React.FC = () => {
   const [isNative, setIsNative] = useState(false);
   const [platform, setPlatform] = useState<string>('web');
   const [isOnline, setIsOnline] = useState(true);
+  const [apiUrl, setApiUrl] = useState<string>('');
 
   useEffect(() => {
     // Check if we're running in a native environment
@@ -27,6 +29,9 @@ export const MobileInfo: React.FC = () => {
     };
 
     checkNativeEnvironment();
+    
+    // Set API URL for display
+    setApiUrl(API_CONFIG.getBaseUrl());
 
     // Monitor online status
     const handleOnline = () => setIsOnline(true);
@@ -70,11 +75,21 @@ export const MobileInfo: React.FC = () => {
             {isOnline ? "Online" : "Offline"}
           </Badge>
         </div>
+        
+        <div className="flex items-center justify-between">
+          <span className="text-sm font-medium">API URL:</span>
+          <span className="text-xs text-muted-foreground truncate max-w-32">
+            {apiUrl || 'Not configured'}
+          </span>
+        </div>
 
         {isNative && (
           <div className="mt-4 p-3 bg-green-50 dark:bg-green-900/20 rounded-lg">
             <p className="text-sm text-green-800 dark:text-green-200">
               🎉 Running in native mobile environment!
+            </p>
+            <p className="text-xs text-green-700 dark:text-green-300 mt-1">
+              Using secure storage and mobile API configuration
             </p>
           </div>
         )}

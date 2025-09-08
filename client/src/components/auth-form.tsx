@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent } from "@/components/ui/card";
 import { storeToken } from "@/lib/auth";
+import { API_CONFIG } from "@/lib/config";
 
 interface AuthFormProps {
   onSuccess: (user: { email: string }) => void;
@@ -40,7 +41,8 @@ export default function AuthForm({ onSuccess, onStatusChange, isLoading, setIsLo
 
     try {
       const endpoint = isRegister ? '/api/register' : '/api/login';
-      const response = await fetch(endpoint, {
+      const apiUrl = API_CONFIG.getApiUrl(endpoint);
+      const response = await fetch(apiUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

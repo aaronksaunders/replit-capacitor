@@ -1,5 +1,5 @@
-import { Capacitor } from '@capacitor/core';
-import { SecureStorage as CapacitorSecureStorage } from '@aparajita/capacitor-secure-storage';
+import { Capacitor } from "@capacitor/core";
+import { SecureStorage as CapacitorSecureStorage } from "@aparajita/capacitor-secure-storage";
 
 /**
  * Secure storage utility that uses Capacitor Secure Storage on mobile devices
@@ -7,7 +7,7 @@ import { SecureStorage as CapacitorSecureStorage } from '@aparajita/capacitor-se
  * for JWT token storage
  */
 export class SecureStorage {
-  private static readonly TOKEN_KEY = 'jwt_token';
+  private static readonly TOKEN_KEY = "jwt_token";
 
   /**
    * Store a JWT token securely
@@ -53,7 +53,7 @@ export class SecureStorage {
         await CapacitorSecureStorage.remove(this.TOKEN_KEY);
       } catch (error) {
         // Token not found or error accessing secure storage
-        console.warn('Error removing token from secure storage:', error);
+        console.warn("Error removing token from secure storage:", error);
       }
     } else {
       // Use localStorage for web browsers
@@ -67,7 +67,7 @@ export class SecureStorage {
    */
   static async hasToken(): Promise<boolean> {
     const token = await this.getToken();
-    return token !== null && token !== '';
+    return token !== null && token !== "";
   }
 
   /**
@@ -79,7 +79,7 @@ export class SecureStorage {
       try {
         await CapacitorSecureStorage.clear();
       } catch (error) {
-        console.warn('Error clearing secure storage:', error);
+        console.warn("Error clearing secure storage:", error);
       }
     } else {
       // Use localStorage for web browsers
