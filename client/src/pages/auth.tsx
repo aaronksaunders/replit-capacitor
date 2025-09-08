@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Shield, ShieldCheck, User, Smartphone } from "lucide-react";
 import AuthForm from "@/components/auth-form";
 import StatusDisplay from "@/components/status-display";
+import { MobileInfo } from "@/components/mobile-info";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { getStoredToken, removeStoredToken, isTokenValid } from "@/lib/auth";
@@ -194,6 +195,9 @@ export default function AuthPage() {
             isLoading={isLoading}
             onClear={() => setStatusMessage(null)}
           />
+
+          {/* Mobile Info */}
+          <MobileInfo />
 
           {/* Development Info */}
           <Card className="bg-muted" data-testid="card-dev-info">
