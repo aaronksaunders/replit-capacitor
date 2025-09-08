@@ -36,9 +36,7 @@ export default defineConfig({
   },
   define: {
     // Define environment variables for Vite
-    "import.meta.env.VITE_API_URL": JSON.stringify(
-      process.env.VITE_API_URL || ""
-    ),
+    // Only mobile needs environment variable configuration
     "import.meta.env.VITE_MOBILE_API_URL": JSON.stringify(
       process.env.VITE_MOBILE_API_URL || "https://your-server.com"
     ),

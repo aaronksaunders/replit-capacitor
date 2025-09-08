@@ -1,4 +1,4 @@
-import { Capacitor } from '@capacitor/core';
+import { Capacitor } from "@capacitor/core";
 
 /**
  * API configuration that adapts based on the platform
@@ -14,10 +14,10 @@ export const API_CONFIG = {
     if (Capacitor.isNativePlatform()) {
       // For mobile devices, use the mobile API URL
       // This should be set as an environment variable in production
-      return import.meta.env.VITE_MOBILE_API_URL || 'https://your-server.com';
+      return import.meta.env.VITE_MOBILE_API_URL || "https://your-server.com";
     } else {
-      // For web browsers, use relative URLs for Replit development
-      return import.meta.env.VITE_API_URL || '';
+      // For web browsers, use empty string for relative URLs (Replit)
+      return "";
     }
   },
 
@@ -28,8 +28,8 @@ export const API_CONFIG = {
    */
   getApiUrl(endpoint: string): string {
     const baseUrl = this.getBaseUrl();
-    const cleanEndpoint = endpoint.startsWith('/') ? endpoint : `/${endpoint}`;
-    
+    const cleanEndpoint = endpoint.startsWith("/") ? endpoint : `/${endpoint}`;
+
     if (Capacitor.isNativePlatform()) {
       // For mobile, always use absolute URLs
       return `${baseUrl}${cleanEndpoint}`;
@@ -53,5 +53,5 @@ export const API_CONFIG = {
    */
   getPlatform(): string {
     return Capacitor.getPlatform();
-  }
+  },
 };

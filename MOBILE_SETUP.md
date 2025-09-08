@@ -6,21 +6,21 @@ This guide explains how to configure the mobile app for different environments.
 
 The app uses different API URLs based on the platform:
 
-- **Web (Replit)**: Uses relative URLs for development
-- **Mobile**: Uses absolute URLs for native app communication
+- **Web (Replit)**: Uses relative URLs automatically (no configuration needed)
+- **Mobile**: Uses absolute URLs for native app communication (requires configuration)
 
 ### Setting Environment Variables
 
 Create a `.env` file in the project root with the following variables:
 
 ```bash
-# For web development (Replit)
-VITE_API_URL=http://localhost:5000
-
-# For mobile development
+# Mobile API Configuration
+# Only needed for mobile app development
 # Replace with your actual server URL when deploying
 VITE_MOBILE_API_URL=https://your-server.com
 ```
+
+**Note**: Web/Replit builds work without any environment variables!
 
 ### For Production Deployment
 
