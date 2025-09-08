@@ -5,3 +5,4 @@ dist-mobile
 server/public
 vite.config.ts.*
 *.tar.gz
+.env
