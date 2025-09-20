@@ -306,13 +306,14 @@ VITE_MOBILE_API_URL=https://your-server.com
 - [Drizzle ORM Documentation](https://orm.drizzle.team)
 - [JWT.io](https://jwt.io) - JWT token debugging
 
-## 🤝 Contributing
+## Author
 
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Add tests if applicable
-5. Submit a pull request
+Created by Aaron K. Saunders
+
+- 🎥 [YouTube Channel](https://www.youtube.com/channel/UCMCcqbJpyL3LAv3PJeYz2bg/)
+- 🐦 [Twitter](https://x.com/aaronksaunders)
+- 💼 [LinkedIn](https://www.linkedin.com/in/aaronksaunders/)
+- 🌐 [GitHub](https://github.com/aaronksaunders)
 
 ## 📄 License
 
