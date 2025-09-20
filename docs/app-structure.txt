@@ -1,0 +1,159 @@
+# JWT Auth Demo - Application Structure
+
+## High-Level Architecture
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                        Client Applications                      │
+├─────────────────────────────────┬───────────────────────────────┤
+│           Web App               │        Mobile App              │
+│  (React + Vite + Tailwind)     │  (Capacitor + Native Plugins) │
+├─────────────────────────────────┼───────────────────────────────┤
+│ • localStorage for tokens       │ • Secure Storage (Keychain)   │
+│ • Relative API URLs            │ • Absolute API URLs            │
+│ • Standard web UI              │ • Safe Area support            │
+│ • Browser-based auth           │ • Native mobile experience     │
+└─────────────────────────────────┴───────────────────────────────┘
+                                │
+                                ▼
+┌─────────────────────────────────────────────────────────────────┐
+│                      Backend Server                            │
+│              (Node.js + Express + Drizzle ORM)                │
+├─────────────────────────────────────────────────────────────────┤
+│ • JWT token generation & validation                            │
+│ • User registration & authentication                           │
+│ • Protected API endpoints                                      │
+│ • CORS configuration for mobile                                │
+│ • SQLite database with Drizzle ORM                             │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+## Component Hierarchy
+```
+App.tsx
+├── SafeAreaProvider
+├── QueryClientProvider
+├── TooltipProvider
+└── Router
+    └── AuthPage
+        ├── AuthForm
+        │   ├── Input Components
+        │   └── Button Components
+        ├── StatusDisplay
+        ├── MobileInfo
+        └── Card Components
+            ├── Authentication Status
+            ├── Protected Actions
+            └── Development Info
+```
+
+## Data Flow
+```
+User Input
+    ↓
+AuthForm Component
+    ↓
+Auth Service (lib/auth.ts)
+    ↓
+Secure Storage (lib/secure-storage.ts)
+    ↓
+API Configuration (lib/config.ts)
+    ↓
+Express Server (server/)
+    ↓
+Database (SQLite + Drizzle)
+```
+
+## Mobile-Specific Features
+```
+Capacitor Core
+├── Platform Detection
+│   ├── iOS
+│   ├── Android
+│   └── Web
+├── Safe Area Plugin
+│   ├── Notch Detection
+│   ├── Status Bar Handling
+│   └── Home Indicator Support
+└── Secure Storage Plugin
+    ├── iOS Keychain
+    ├── Android Keystore
+    └── Web localStorage (fallback)
+```
+
+## Build Process
+```
+Source Code
+    ├── Web Build (Vite)
+    │   └── dist/ (for web deployment)
+    └── Mobile Build (Vite + Capacitor)
+        ├── dist-mobile/ (web assets)
+        ├── ios/ (iOS native project)
+        └── android/ (Android native project)
+```
+
+## Security Layers
+```
+Client Security
+├── HTTPS Only
+├── Token Validation
+└── Secure Storage
+    ├── iOS Keychain
+    ├── Android Keystore
+    └── Web localStorage
+
+Server Security
+├── CORS Configuration
+├── JWT Signing & Validation
+├── Password Hashing (bcrypt)
+└── Input Validation
+
+Data Protection
+├── Encryption at Rest
+├── Input Sanitization
+└── Rate Limiting
+```
+
+## Environment Configuration
+```
+Development
+├── .env.development
+├── Local SQLite Database
+└── Dev Server (localhost:5173)
+
+Production
+├── .env.production
+├── Production Database
+└── Production Server
+
+Mobile
+├── VITE_MOBILE_API_URL
+├── Absolute API URLs
+└── Secure Storage Configuration
+```
+
+## File Structure
+```
+replit-capacitor/
+├── client/                    # React frontend
+│   ├── src/
+│   │   ├── components/        # UI components
+│   │   ├── pages/            # Page components
+│   │   ├── lib/              # Utilities & services
+│   │   └── hooks/            # Custom hooks
+│   └── index.html            # HTML template
+├── server/                   # Express backend
+│   ├── index.ts              # Server entry
+│   ├── routes.ts             # API routes
+│   └── storage.ts            # Database setup
+├── shared/                   # Shared types
+│   └── schema.ts             # Database schema
+├── ios/                      # iOS native project
+├── android/                  # Android native project
+├── docs/                     # Documentation
+├── dist/                     # Web build output
+├── dist-mobile/              # Mobile build output
+└── Configuration files
+    ├── capacitor.config.ts
+    ├── vite.config.ts
+    └── package.json
+```

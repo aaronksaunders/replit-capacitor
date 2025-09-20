@@ -1,15 +1,26 @@
-const TOKEN_KEY = 'jwt_token';
+import { SecureStorage } from './secure-storage';
 
-export function storeToken(token: string): void {
-  localStorage.setItem(TOKEN_KEY, token);
+/**
+ * Store a JWT token securely (uses Capacitor Preferences on mobile, localStorage on web)
+ * @param token - The JWT token to store
+ */
+export async function storeToken(token: string): Promise<void> {
+  await SecureStorage.setToken(token);
 }
 
-export function getStoredToken(): string | null {
-  return localStorage.getItem(TOKEN_KEY);
+/**
+ * Retrieve the stored JWT token (uses Capacitor Preferences on mobile, localStorage on web)
+ * @returns The JWT token or null if not found
+ */
+export async function getStoredToken(): Promise<string | null> {
+  return await SecureStorage.getToken();
 }
 
-export function removeStoredToken(): void {
-  localStorage.removeItem(TOKEN_KEY);
+/**
+ * Remove the stored JWT token (uses Capacitor Preferences on mobile, localStorage on web)
+ */
+export async function removeStoredToken(): Promise<void> {
+  await SecureStorage.removeToken();
 }
 
 export function isTokenValid(token: string): boolean {
